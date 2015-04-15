@@ -27,14 +27,14 @@ class Interface(Model):
         return self.name
 
 class Cpu(Model):
-    router = ForeignKey(Router, related_name='cpu')
+    router = ForeignKey(Router, related_name='cpus')
     time = DateTimeField()
     utilization = IntegerField(default=0)
     def __str__(self):
         return "%s - %s" % (self.time, self.utilization)
 
 class Memory(Model):
-    router = ForeignKey(Router, related_name='memory')
+    router = ForeignKey(Router, related_name='memorys')
     time = DateTimeField()
     utilization = IntegerField(default=0)
     def __str__(self):
