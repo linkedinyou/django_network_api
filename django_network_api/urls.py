@@ -14,6 +14,9 @@ from router_api.views import *
 router = routers.DefaultRouter(trailing_slash=False)
 router.register(r'api/devices', RouterViewSet)
 router.register(r'api/vpns', VpnViewSet)
+router.register(r'api/cpus', CpuViewSet)
+router.register(r'api/memorys', MemoryViewSet)
+router.register(r'api/routecount', RouteCountViewSet)
 
 urlpatterns = [
     # Include our router URLs from above
