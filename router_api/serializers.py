@@ -1,9 +1,11 @@
 from rest_framework import serializers
+from django.utils import timezone
 
 from .models import *
 
 class CpuSerializer(serializers.HyperlinkedModelSerializer):
     router = serializers.PrimaryKeyRelatedField(queryset=Router.objects.all())
+
     class Meta:
         model = Cpu
         fields = ('id', 'time', 'utilization', 'url', 'router')
@@ -11,6 +13,7 @@ class CpuSerializer(serializers.HyperlinkedModelSerializer):
 
 class MemorySerializer(serializers.ModelSerializer):
     router = serializers.PrimaryKeyRelatedField(queryset=Router.objects.all())
+
     class Meta:
         model = Memory
         fields = ('id', 'time', 'utilization', 'url', 'router')
@@ -22,7 +25,7 @@ class RouteCountSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = RouteCount
         fields = ('id', 'time', 'count', 'url', 'vpn')
-        
+
 
 class VpnSerializer(serializers.HyperlinkedModelSerializer):
     num_routes = RouteCountSerializer(many = True, read_only = True)
