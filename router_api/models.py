@@ -11,9 +11,15 @@ class Vpn(Model):
     name = CharField(max_length=200)
     import_target = CharField(max_length=52)
     route_target = CharField(max_length=52)
-    num_routes = IntegerField(default=0)
     def __str__(self):
         return self.name
+
+class RouteCount(Model):
+    vpn = ForeignKey(Vpn, related_name='num_routes')
+    time = DateTimeField()
+    count = IntegerField(default=0)
+    def __str__(self):
+        return "%s:%s - %s" % (self.vpn, self.time, self.count)
 
 class Interface(Model):
     router = ForeignKey(Router, related_name='interfaces')
@@ -31,13 +37,13 @@ class Cpu(Model):
     time = DateTimeField()
     utilization = IntegerField(default=0)
     def __str__(self):
-        return "%s - %s" % (self.time, self.utilization)
+        return "%s:%s - %s" % (self.router, self.time, self.utilization)
 
 class Memory(Model):
     router = ForeignKey(Router, related_name='memorys')
     time = DateTimeField()
     utilization = IntegerField(default=0)
     def __str__(self):
-        return "%s - %s" % (self.time, self.utilization)
+        return "%s:%s - %s" % (self.router, self.time, self.utilization)
 
 

@@ -12,9 +12,17 @@ class MemorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Memory
         fields = ('id', 'time', 'utilization')
+
+
+class RouteCountSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = RouteCount
+        fields = ('id', 'time', 'count')
         
 
-class VpnSerializer(serializers.ModelSerializer):
+class VpnSerializer(serializers.HyperlinkedModelSerializer):
+    num_routes = RouteCountSerializer(many = True)
+
     class Meta:
         model = Vpn
 
@@ -28,7 +36,7 @@ class RouterSerializer(serializers.HyperlinkedModelSerializer):
     cpus = CpuSerializer(many = True, read_only = True)
     memorys = MemorySerializer(many = True, read_only = True)
     interfaces = InterfaceSerializer(many = True, read_only = True) 
-    vpns = VpnSerializer(many = True, read_only = True)
+    vpns = VpnSerializer(many = True)
 
     class Meta:
         model = Router

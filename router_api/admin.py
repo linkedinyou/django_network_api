@@ -5,6 +5,7 @@ admin.site.register(Router)
 admin.site.register(Interface)
 admin.site.register(Cpu)
 admin.site.register(Vpn)
+admin.site.register(RouteCount)
 admin.site.register(Memory)
 
 # Register your models here.

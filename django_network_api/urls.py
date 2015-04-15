@@ -4,7 +4,7 @@ from django.contrib.auth.models import *
 
 from rest_framework import routers
 
-from router_api.views import RouterViewSet
+from router_api.views import *
 
 ''' Routers provide an easy way of automatically determining the URL
     configuration.
@@ -13,6 +13,7 @@ from router_api.views import RouterViewSet
     '''
 router = routers.DefaultRouter(trailing_slash=False)
 router.register(r'api/devices', RouterViewSet)
+router.register(r'api/vpns', VpnViewSet)
 
 urlpatterns = [
     # Include our router URLs from above
