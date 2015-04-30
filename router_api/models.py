@@ -17,7 +17,7 @@ class Vpn(Model):
 
 class RouteCount(Model):
     vpn = ForeignKey(Vpn, related_name='num_routes')
-    time = DateTimeField()
+    time = DateTimeField(default=datetime.now())
     count = IntegerField(default=0)
     def __str__(self):
         return "%s:%s - %s" % (self.vpn, self.time, self.count)
