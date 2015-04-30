@@ -1,5 +1,5 @@
 from django.core.management.base import BaseCommand, CommandError
-from router_api.models import Router, Vpn
+from router_api.models import Router, Vpn, RouteCount
 
 from netw0rk import Juniper
 
@@ -17,14 +17,9 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         for router in Router.objects.all():
-            vpn_list = self.gatherVpnData(router.name)
-            self.updateRouterVpns(router, vpn_list)
-
-
-    def gatherVpnData(self, device):
-        ''' Add a device vendor check here, for now just use Juniper '''
-        device = Juniper(device)
-        return device.vpns
+            device = Juniper(router.name)
+            self.updateRouterVpns(router, device.vpns)
+            self.updateRouteCounts(router, device)
 
 
     def updateRouterVpns(self, router, vpn_list):
@@ -34,3 +29,14 @@ class Command(BaseCommand):
                 name=vpn
                 )
             new_vpn.save()
+
+
+    def updateRouteCounts(self, router, device):
+        for vpn_count in device.vpn_num_routes:
+            vpn_name, route_count = vpn_count
+            vpn = Vpn.objects.filter(router=router, name=vpn_name)
+            new_route_count, created = RouteCount.objects.create(
+                vpn=vpn,
+                count=route_count
+                )
+            new_route_count.save()
