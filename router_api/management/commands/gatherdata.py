@@ -35,8 +35,7 @@ class Command(BaseCommand):
         for vpn_count in device.vpn_num_routes:
             vpn_name, route_count = vpn_count
             vpn = Vpn.objects.get(router=router, name=vpn_name)
-            new_route_count, created = RouteCount.objects.create(
+            RouteCount.objects.create(
                 vpn=vpn,
                 count=route_count
                 )
-            new_route_count.save()
