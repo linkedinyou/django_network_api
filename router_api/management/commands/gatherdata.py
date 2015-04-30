@@ -29,8 +29,8 @@ class Command(BaseCommand):
 
     def updateRouterVpns(self, router, vpn_list):
         for vpn in vpn_list:
-            new_vpn = Vpn.objects.get_or_create(
-                router=router.id,
-                vpn=vpn
+            new_vpn, created = Vpn.objects.get_or_create(
+                router=router,
+                name=vpn
                 )
             new_vpn.save()

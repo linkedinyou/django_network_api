@@ -1,8 +1,9 @@
+from datetime import datetime, timedelta
 from django.db.models import *
 
 class Router(Model):
     name = CharField(max_length=200)
-    updated_at = DateTimeField()
+    updated_at = DateTimeField(default=datetime.now())
     def __str__(self):
         return self.name
 
