@@ -21,5 +21,5 @@ I will eventually add a setup.py include to manage dependencies.
     ./manage.py gatherdata
 
 # View your data through the API
-* ./manage.py runserver
-* http://your-server:your:port/api/
+* ./manage.py runserver 0.0.0.0:8000
+* http://your-server:8000
