@@ -1,15 +1,15 @@
 from datetime import datetime, timedelta
 from django.db.models import *
 
+class Vendor(Model):
+    name = CharField(max_length=52)
+    def __str__(self):
+        return self.name
+
 class Router(Model):
     name = CharField(max_length=200)
     vendor = ForeignKey(Vendor, related_name='vendor')
     updated_at = DateTimeField(default=datetime.now())
-    def __str__(self):
-        return self.name
-
-class Vendor(Model):
-    name = CharField(max_length=52)
     def __str__(self):
         return self.name
 
