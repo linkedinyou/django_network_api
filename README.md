@@ -1,6 +1,9 @@
 # django_network_api
 Backend API for routers and switches written in Django. Uses the netw0rk framework to gather SNMP data from devices.
 
+Requires Django 1.8+ and some additional Django packages (django-rest-framework, etc.)
+I will eventually add a setup.py include to manage dependencies.
+
 # Example gathering data
     ''' Create our default SQLITE3 database '''
     ./manage.py migrate
