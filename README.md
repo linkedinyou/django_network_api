@@ -2,9 +2,9 @@
 Backend API for routers and switches written in Django. Uses the netw0rk framework to gather SNMP data from devices.
 
 # Example gathering data
-* ./manage.py migrate
-* ./manage.py shell
-* from router_api.models import Router, Vendor
+  ./manage.py migrate
+  ./manage.py shell
+    from router_api.models import Router, Vendor
 * vendor = Vendor(name='juniper')
 * vendor.save()
 * router = Router(name='some.device', vendor=vendor)
