@@ -22,7 +22,7 @@ class Vpn(Model):
         return self.name
 
 class RouteCount(Model):
-    vpn = ForeignKey(Vpn, related_name='num_routes')
+    vpn = ForeignKey(Vpn, related_name='numroutes')
     time = DateTimeField(default=timezone.now)
     count = IntegerField(default=0)
     def __str__(self):
