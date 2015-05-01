@@ -1,7 +1,7 @@
 from django.core.management.base import BaseCommand, CommandError
 from router_api.models import Router, Vpn, RouteCount
 
-from netw0rk import Juniper
+import netw0rk
 
 class Command(BaseCommand):
     ''' This management script could be used by cron to schedule 
@@ -17,7 +17,11 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         for router in Router.objects.all():
-            device = Juniper(router.name)
+	    if router.vendor.name == 'juniper':
+	    	device = netw0rk.Juniper(router.name)
+	    else:
+		''' Build a generic device '''
+		device = netw0rk.Device(router.name)
             self.updateRouterVpns(router, device.vpns)
             self.updateRouteCounts(router, device)
 

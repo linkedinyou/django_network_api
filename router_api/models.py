@@ -1,5 +1,5 @@
-from datetime import datetime, timedelta
 from django.db.models import *
+from django.utils import timezone
 
 class Vendor(Model):
     name = CharField(max_length=52)
@@ -9,7 +9,7 @@ class Vendor(Model):
 class Router(Model):
     name = CharField(max_length=200)
     vendor = ForeignKey(Vendor, related_name='vendor')
-    updated_at = DateTimeField(default=datetime.now())
+    updated_at = DateTimeField(default=timezone.now)
     def __str__(self):
         return self.name
 
@@ -23,7 +23,7 @@ class Vpn(Model):
 
 class RouteCount(Model):
     vpn = ForeignKey(Vpn, related_name='num_routes')
-    time = DateTimeField(default=datetime.now())
+    time = DateTimeField(default=timezone.now)
     count = IntegerField(default=0)
     def __str__(self):
         return "%s:%s - %s" % (self.vpn, self.time, self.count)
