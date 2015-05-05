@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from rest_framework import filters
 
 from .models import *
 
@@ -17,6 +18,7 @@ class UnixEpochDateField(serializers.DateTimeField):
 
 class CpuSerializer(serializers.ModelSerializer):
     router = serializers.PrimaryKeyRelatedField(queryset=Router.objects.all())
+    time = UnixEpochDateField() 
 
     class Meta:
         model = Cpu
@@ -42,6 +44,7 @@ class RouteCountSerializer(serializers.ModelSerializer):
 
 class VpnSerializer(serializers.ModelSerializer):
     numroutes = RouteCountSerializer(many = True, read_only = True)
+    filter_fields = ('router')
 
     class Meta:
         model = Vpn
@@ -54,11 +57,11 @@ class InterfaceSerializer(serializers.ModelSerializer):
 
 
 class RouterSerializer(serializers.ModelSerializer):
-    cpus = CpuSerializer(many = True, read_only = True)
+#    cpus = CpuSerializer(many = True, read_only = True)
     memorys = MemorySerializer(many = True, read_only = True)
     interfaces = InterfaceSerializer(many = True, read_only = True) 
     vpns = VpnSerializer(many = True, read_only=True)
 
     class Meta:
         model = Router
-        fields = ('id', 'name', 'cpus', 'memorys', 'interfaces', 'vpns', 'updated_at', 'url')
+        fields = ('id', 'name', 'memorys', 'interfaces', 'vpns', 'updated_at', 'url')

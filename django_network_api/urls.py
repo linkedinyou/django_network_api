@@ -11,7 +11,7 @@ from router_api.views import *
     
     Here we are registering our 'routers' API from the vpnMonitor app.
     '''
-router = routers.DefaultRouter(trailing_slash=False)
+router = routers.DefaultRouter()
 router.register(r'api/devices', RouterViewSet)
 router.register(r'api/vpns', VpnViewSet)
 router.register(r'api/cpus', CpuViewSet)
