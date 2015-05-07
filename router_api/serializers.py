@@ -3,6 +3,7 @@ from rest_framework import filters
 
 from .models import *
 
+
 class UnixEpochDateField(serializers.DateTimeField):
     def to_representation(self, value):
         """ Return epoch time for a datetime object or ``None``"""
@@ -57,11 +58,11 @@ class InterfaceSerializer(serializers.ModelSerializer):
 
 
 class RouterSerializer(serializers.ModelSerializer):
-#    cpus = CpuSerializer(many = True, read_only = True)
+    #    cpus = CpuSerializer(many = True, read_only = True)
     memorys = MemorySerializer(many = True, read_only = True)
     interfaces = InterfaceSerializer(many = True, read_only = True) 
-    vpns = VpnSerializer(many = True, read_only=True)
+    #vpns = VpnSerializer(many = True, read_only=True)
 
     class Meta:
         model = Router
-        fields = ('id', 'name', 'memorys', 'interfaces', 'vpns', 'updated_at', 'url')
+        fields = ('id', 'name', 'memorys', 'interfaces', 'updated_at', 'url')
